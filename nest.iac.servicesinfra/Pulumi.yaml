@@ -9,3 +9,56 @@ config:
     - "subnet-07db2b36ef959844a"
   cld:securityGroups:
     - "sg-03a3776a8702f98c7"
+  cld:clusterArn: "arn:aws:ecs:us-east-1:949982764789:cluster/nest-generalinfra-clusterecs"
+  cld:apiId: "7p4yx3l258"
+  cld:services:
+    - serviceName: "security"  
+      routepath: "/security"
+      contextDocker: "../"
+      pathProject: "../nest.core.security/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "rrhh"  
+      routepath: "/rrhh"
+      contextDocker: "../"
+      pathProject: "../nest.core.rrhh/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "mantto"  
+      routepath: "/mantto"
+      contextDocker: "../"
+      pathProject: "../nest.core.mantto/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "logistica"  
+      routepath: "/logistica"
+      contextDocker: "../"
+      pathProject: "../nest.core.logistica/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "legal"  
+      routepath: "/legal"
+      contextDocker: "../"
+      pathProject: "../nest.core.legal/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "general"  
+      routepath: "/general"
+      contextDocker: "../"
+      pathProject: "../nest.core.general/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "finanzas"  
+      routepath: "/finanzas"
+      contextDocker: "../"
+      pathProject: "../nest.core.finanzas/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "costos"  
+      routepath: "/costos"
+      contextDocker: "../"
+      pathProject: "../nest.core.costos/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "corporativo"  
+      routepath: "/corporativo"
+      contextDocker: "../"
+      pathProject: "../nest.core.corporativo/lambda.Dockerfile"
+      port: 8080
+    - serviceName: "contabilidad"  
+      routepath: "/contabilidad"
+      contextDocker: "../"
+      pathProject: "../nest.core.contabilidad/lambda.Dockerfile"
+      port: 8080

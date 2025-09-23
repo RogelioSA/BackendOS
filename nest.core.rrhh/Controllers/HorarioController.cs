@@ -49,7 +49,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -73,7 +73,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -97,7 +97,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -122,7 +122,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -146,7 +146,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
     }

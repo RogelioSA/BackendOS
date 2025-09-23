@@ -1,12 +1,14 @@
 FROM pulumi/pulumi-dotnet:latest
 
-WORKDIR /work/infra
+WORKDIR /work/solution
 
-COPY . /work/infra/
+COPY . /work/solution
 
-COPY pulumi_commands.sh /usr/local/bin/pulumi_commands.sh
+COPY ./nest.iac.servicesinfra/pulumi_commands.sh /usr/local/bin/pulumi_commands.sh
 RUN sed -i 's/\r$//' /usr/local/bin/pulumi_commands.sh && \
     chmod +x /usr/local/bin/pulumi_commands.sh
 
+WORKDIR /work/solution/nest.iac.servicesinfra
+RUN dotnet restore
+
 ENTRYPOINT ["/usr/local/bin/pulumi_commands.sh"]
-#CMD ["/usr/local/bin/pulumi_commands.sh"]

@@ -10,3 +10,5 @@ pulumi stack select ${PULUMI_STACK} --non-interactive --create
 # Ejecuta la actualización
 pulumi refresh --yes
 pulumi up --yes
+#pulumi destroy --yes --stack "${PULUMI_STACK}"
+#pulumi stack rm --yes "${PULUMI_STACK}"

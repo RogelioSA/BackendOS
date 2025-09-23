@@ -16,7 +16,6 @@ namespace nest.core.view.main.Models
         public async Task<AuthResponse> execute(LoginDto input)
         {
             Dictionary<string, string> keys = new Dictionary<string, string>();
-            keys.Add("x-action-login", input.TenantId);
             return await restApi.executeRequest<AuthResponse, LoginDto>("/security/Auth/login", input, keys);
         }
     }

@@ -7,7 +7,7 @@ using nest.core.infraestructura.db.DbContext;
 
 namespace nest.core.infraestructura.contabilidad
 {
-    public class CuentaContableRepository : CachedRepositoryBase<CuentaContable, CuentaContableCrearDto, int>, ICuentaContableRepository
+    public class CuentaContableRepository : CachedRepositoryBase<CuentaContable, CuentaContableCrearDto, long>, ICuentaContableRepository
     {
         public CuentaContableRepository(NestDbContext context, IMapper mapper, ICacheRepository cache) : base(context, mapper, cache) { }
         protected override IQueryable<CuentaContable> Query() => context.Set<CuentaContable>()

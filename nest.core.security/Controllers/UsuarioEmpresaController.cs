@@ -49,7 +49,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -71,7 +71,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -93,7 +93,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -115,7 +115,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -138,7 +138,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -160,7 +160,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -182,7 +182,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
     }

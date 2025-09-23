@@ -1,5 +1,4 @@
-version: "3"
-services:
+﻿services:
   sqlserverimage:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserverimage
@@ -9,55 +8,56 @@ services:
       - MSSQL_SA_PASSWORD=4N&XY&d_0y6+
     ports:
       - "1433:1433"
-  postgresimage:
-    image: postgres
-    container_name: postgresimage
-    restart: always
-    environment:
-      - POSTGRES_PASSWORD=4N&XY&d_0y6+
-    ports:
-      - "5431:5432"
-  mysqlimage:
-    image: mysql
-    container_name: mysqlimage
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=4N&XY&d_0y6+
-    ports:
-      - "3305:3306"
-
-  # pulumiiac:
-  #   build:
-  #     context: ./nest.iac.generalinfra
-  #     dockerfile: Dockerfile
-  #   container_name: pulumiiac
-  #   #restart: always
+  # postgresimage:
+  #   image: postgres
+  #   container_name: postgresimage
+  #   restart: always
   #   environment:
-  #     - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-  #     - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-  #     - AWS_DEFAULT_REGION=us-east-1
-  #     - PULUMI_CONFIG_PASSPHRASE=${PULUMI_CONFIG_PASSPHRASE}
-  #     - PULUMI_STACK=${PULUMI_STACK}
-  #     - PULUMI_ACCESS_TOKEN=${PULUMI_ACCESS_TOKEN}
-  #     - DATABASE_NAME=${DATABASE_NAME}
-  #     - DATABASE_MASTERUSER=${DATABASE_MASTERUSER}
-  #     - DATABASE_MASTERPW=${DATABASE_MASTERPW}
-  #     - DATABASE_PORT=${DATABASE_PORT}
-
-  # servicesiac:
-  #   build:
-  #     context: ./nest.iac.servicesinfra
-  #     dockerfile: Dockerfile
-  #   container_name: servicesiac
-  #   #restart: always
+  #     - POSTGRES_PASSWORD=4N&XY&d_0y6+
+  #   ports:
+  #     - "5431:5432"
+  # mysqlimage:
+  #   image: mysql
+  #   container_name: mysqlimage
+  #   restart: always
   #   environment:
-  #     - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-  #     - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-  #     - AWS_DEFAULT_REGION=us-east-1
-  #     - PULUMI_CONFIG_PASSPHRASE=${PULUMI_CONFIG_PASSPHRASE}
-  #     - PULUMI_STACK=${PULUMI_STACK}
-  #     - PULUMI_ACCESS_TOKEN=${PULUMI_ACCESS_TOKEN}
-  #     - CONNECTION_STRING=${CONNECTION_STRING}
+  #     - MYSQL_ROOT_PASSWORD=4N&XY&d_0y6+
+  #   ports:
+  #     - "3305:3306"
+
+  pulumiiac:
+    build:
+        context: ./nest.iac.generalinfra
+        dockerfile: Dockerfile
+    container_name: pulumiiac
+    #restart: always
+    environment:
+        - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+        - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+        - AWS_DEFAULT_REGION=us-east-1
+        - PULUMI_CONFIG_PASSPHRASE=${PULUMI_CONFIG_PASSPHRASE}
+        - PULUMI_STACK=${PULUMI_STACK_GENERAL}
+        - PULUMI_ACCESS_TOKEN=${PULUMI_ACCESS_TOKEN}
+        - DATABASE_NAME=${DATABASE_NAME}
+        - DATABASE_MASTERUSER=${DATABASE_MASTERUSER}
+        - DATABASE_MASTERPW=${DATABASE_MASTERPW}
+        - DATABASE_PORT=${DATABASE_PORT}
+
+  servicesiac:
+    build:
+      context: .
+      dockerfile: ./nest.iac.servicesinfra/Dockerfile
+    container_name: servicesiac
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=us-east-1
+      - PULUMI_CONFIG_PASSPHRASE=${PULUMI_CONFIG_PASSPHRASE}
+      - PULUMI_STACK=${PULUMI_STACK_SERVICES}
+      - PULUMI_ACCESS_TOKEN=${PULUMI_ACCESS_TOKEN}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    user: "0:0"
 
   # securityservice:
   #   build:

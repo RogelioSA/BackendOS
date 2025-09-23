@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace nest.core.dominio.Corporativo.EstructuraOrganizacionalEntities
 {
     public class EstructuraOrganizacionalCrearDto
@@ -5,6 +7,7 @@ namespace nest.core.dominio.Corporativo.EstructuraOrganizacionalEntities
         public int EmpresaId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+        [StringLength(9)]
         public string NombreCorto { get; set; }
         public int? ParentId { get; set; }
         public int EstructuraOrganizacionalTipoId { get; set; }

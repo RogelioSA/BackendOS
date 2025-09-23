@@ -55,7 +55,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -81,7 +81,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -97,7 +97,7 @@ namespace nest.core.security.Controllers
         [ProducesResponseType(typeof(ApplicationRole), 200)]
         [ProducesResponseType(typeof(ErrorMessage), 400)]
         [ProducesResponseType(401)]
-        public async Task<ActionResult<ApplicationRole>> Agregar([FromBody] ApplicationRole registro)
+        public async Task<ActionResult<ApplicationRole>> Agregar([FromBody] ApplicationRoleDto registro)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace nest.core.security.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
@@ -115,51 +115,52 @@ namespace nest.core.security.Controllers
         /// Modifica un rol existente.
         /// </summary>
         /// <param name="registro">Datos del rol a modificar.</param>
+        /// <param name="roleId">Id del rol.</param>
         /// <returns>El rol modificado.</returns>
         /// <response code="200">Rol modificado correctamente.</response>
         /// <response code="400">Error en la solicitud.</response>
         /// <response code="401">No autorizado.</response>
-        [HttpPut]
+        [HttpPut("{roleId}")]
         [ProducesResponseType(typeof(ApplicationRole), 200)]
         [ProducesResponseType(typeof(ErrorMessage), 400)]
         [ProducesResponseType(401)]
-        public async Task<ActionResult<ApplicationRole>> Modificar([FromBody] ApplicationRole registro)
+        public async Task<ActionResult<ApplicationRole>> Modificar([FromBody] ApplicationRoleDto registro, int roleId)
         {
             try
             {
-                var data = await this.service.Modificar(registro);
+                var data = await this.service.Modificar(registro, roleId);
                 return Ok(data);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
 
         /// <summary>
         /// Elimina un rol.
         /// </summary>
-        /// <param name="registro">Datos del rol a eliminar.</param>
+        /// <param name="roleId">Id del rol a eliminar.</param>
         /// <returns>Verdadero si se eliminó correctamente.</returns>
         /// <response code="200">Rol eliminado correctamente.</response>
         /// <response code="400">Error en la solicitud.</response>
         /// <response code="401">No autorizado.</response>
-        [HttpDelete]
+        [HttpDelete("{roleId}")]
         [ProducesResponseType(typeof(bool), 200)]
         [ProducesResponseType(typeof(ErrorMessage), 400)]
         [ProducesResponseType(401)]
-        public async Task<ActionResult> Eliminar([FromBody] ApplicationRole registro)
+        public async Task<ActionResult> Eliminar(int roleId)
         {
             try
             {
-                await this.service.Eliminar(registro);
+                await this.service.Eliminar(roleId);
                 return Ok(true);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
     }

@@ -8,13 +8,10 @@
 
   <ItemGroup>
     <Compile Remove="Configuration\**" />
-    <Compile Remove="Excepciones\**" />
     <Compile Remove="Ventas\**" />
     <EmbeddedResource Remove="Configuration\**" />
-    <EmbeddedResource Remove="Excepciones\**" />
     <EmbeddedResource Remove="Ventas\**" />
     <None Remove="Configuration\**" />
-    <None Remove="Excepciones\**" />
     <None Remove="Ventas\**" />
   </ItemGroup>
 

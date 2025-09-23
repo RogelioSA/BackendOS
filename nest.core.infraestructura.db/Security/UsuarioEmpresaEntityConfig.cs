@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
 using nest.core.dominio.Security.UsuarioEmpresa;
+using nest.core.infraestructura.db.DbContext;
 
 namespace nest.core.infraestructura.db.Security
 {
@@ -15,7 +18,7 @@ namespace nest.core.infraestructura.db.Security
                 .IsUnique();
             builder.Property(x => x.Id)
                 .ValueGeneratedNever()
-                .HasValueGenerator<GenericValueGenerator<long>>();
+                .HasValueGenerator<UsuarioEmpresaGenerator>();
             builder.HasOne(x => x.Empresa)
                 .WithMany()
                 .HasForeignKey(x => x.EmpresaId);
@@ -32,5 +35,11 @@ namespace nest.core.infraestructura.db.Security
                 new UsuarioEmpresa { Id = 2, EmpresaId = 1, UsuarioId = "2", Actual = true }
             };
         }
+    }
+    public class UsuarioEmpresaGenerator : ValueGenerator<long>
+    {
+        public override bool GeneratesTemporaryValues => false;
+        public override long Next(EntityEntry entry) => GeneradorCorrelativo.GetValue<long>(entry, object () => ((NestDbContext)entry.Context).UsuarioEmpresa.Max(x => x.Id));
+        public override async ValueTask<long> NextAsync(EntityEntry entry, CancellationToken cancellationToken = default) => await GeneradorCorrelativo.GetValueAsync<long>(entry, object () => ((NestDbContext)entry.Context).UsuarioEmpresa.Max(x => x.Id), cancellationToken);
     }
 }

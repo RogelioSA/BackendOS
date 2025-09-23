@@ -30,7 +30,7 @@ namespace nest.core.infraestructura
                     {
                         Schema = esquema,
                         Table = tabla,
-                        LastValue = maxId == null ? PRIMER_NUMERO_CONTADOR : (int)maxId()
+                        LastValue = maxId == null ? PRIMER_NUMERO_CONTADOR : (long)maxId()
                     };
                     correl = ctx.Set<CorrelativoMaestro>().Add(correl).Entity;
                 }
@@ -59,7 +59,7 @@ namespace nest.core.infraestructura
                     {
                         Schema = esquema,
                         Table = tabla,
-                        LastValue = maxId == null ? PRIMER_NUMERO_CONTADOR : (int)maxId()
+                        LastValue = maxId == null ? PRIMER_NUMERO_CONTADOR : (long)maxId()
                     };
                     correl = ctx.Set<CorrelativoMaestro>().Add(correl).Entity;
                 }

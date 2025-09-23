@@ -69,11 +69,6 @@
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="password" name="password" asp-for="Password" placeholder="Ingrese su contraseña" required>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <select class="form-control" id="tenantId" name="tenantId" asp-for="TenantId" required>
-                </select>
-            </div>
             <input type="hidden" id="TwoFactorCode" name="TwoFactorCode" asp-for="TwoFactorCode" value="" required>
             <input type="hidden" id="TwoFactorRecoveryCode" name="TwoFactorRecoveryCode" asp-for="TwoFactorRecoveryCode" value="" required>
             <input type="hidden" id="returnUrl" name="returnUrl" value="@ViewData["ReturnUrl"]" />

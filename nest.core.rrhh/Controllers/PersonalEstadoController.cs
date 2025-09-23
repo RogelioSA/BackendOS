@@ -31,7 +31,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
         [HttpGet("{id}")]
@@ -47,7 +47,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
         [HttpGet("activos")]
@@ -63,7 +63,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
         [HttpPost]
@@ -79,7 +79,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
         [HttpPut("{id}")]
@@ -95,7 +95,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
         [HttpDelete("{id}")]
@@ -111,7 +111,7 @@ namespace nest.core.rrhh.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                return BadRequest(GenerateMessage.Create(ex));
+                throw;
             }
         }
     }

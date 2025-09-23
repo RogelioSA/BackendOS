@@ -10,7 +10,7 @@ namespace nest.core.infraestructura.db.DbContext
     public partial class NestDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         protected readonly string usuario;
-        protected readonly int EmpresaId;
+        public readonly int? EmpresaId;
         protected readonly RequestParameters requestParameters;
         protected readonly IConnectionStringService connectionStringService;
         public NestDbContext(DbContextOptions options, IConnectionStringService connectionStringService)

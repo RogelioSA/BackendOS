@@ -1,17 +1,19 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using nest.core.aplication.auth;
 using nest.core.corporativo.Extensions;
-using nest.core.infraestructura.db.DbContext;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
+Console.WriteLine("Iniciando aplicación Nest Core Corporativo");
+if (Environment.GetEnvironmentVariable("IS_LAMBDA") != null)
+    builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services custom
 builder.Configuration.AddJsonFile("appsettings.json", optional: true)
                      .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
@@ -91,14 +93,15 @@ builder.Services.AddAuthorization();
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("BASE_URL")))
+    app.UsePathBase(Environment.GetEnvironmentVariable("BASE_URL"));
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("CorsPolicy");
+app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = check => check.Tags.Contains("live") });
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
 app.Run();

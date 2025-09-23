@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using nest.core.infraestructura.db.DbContext;
-using nest.core.dominio.Cache;
-using nest.core.infraestructura.db.Utils;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using nest.core.dominio;
-using AutoMapper;
+using nest.core.dominio.Cache;
+using nest.core.infraestructura.db.DbContext;
+using nest.core.infraestructura.db.Utils;
 using nest.core.infrastructura.utils.Excepciones;
 
 namespace nest.core.infraestructura.db.Cache
@@ -18,6 +18,10 @@ namespace nest.core.infraestructura.db.Cache
         {
             this.cache = cache;
             cacheKey = typeof(TEntity).Name;
+            if (typeof(ITenantEntity).IsAssignableFrom(typeof(TEntity)))
+                cacheKey = $"{typeof(TEntity).Name}_{context.EmpresaId}";
+            else
+                cacheKey = $"{typeof(TEntity).Name}";
         }
 
         protected async Task<List<TEntity>> GetCachedListAsync()

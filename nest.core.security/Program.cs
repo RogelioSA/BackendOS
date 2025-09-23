@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -11,10 +12,12 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+if (Environment.GetEnvironmentVariable("IS_LAMBDA") != null)
+    builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+
 // Add services custom
 builder.Configuration.AddJsonFile("appsettings.json", optional: true)
                      .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                     .AddJsonFile($"empresas.json", optional: false, reloadOnChange: true)
                      .AddUserSecrets<Program>()
                      .AddEnvironmentVariables();
 
@@ -68,6 +71,7 @@ builder.Services.AddSwaggerGen(c => {
         new string[] {} }
     });
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+    
 });
 builder.Services.AddAuthentication(option =>
 {
@@ -92,11 +96,31 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 await MigrationResolver.ExecuteMigration(app);
+if(!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("BASE_URL")))
+    app.UsePathBase(Environment.GetEnvironmentVariable("BASE_URL"));
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("CorsPolicy");
+app.MapHealthChecks("/health/live", new HealthCheckOptions {
+    ResponseWriter = async (ctx, report) =>
+    {
+        ctx.Response.ContentType = "application/json";
+        var result = JsonSerializer.Serialize(new
+        {
+            status = report.Status.ToString(),
+            results = report.Entries.Select(e => new
+            {
+                key = e.Key,
+                status = e.Value.Status.ToString(),
+                description = e.Value.Description
+            })
+        });
+        await ctx.Response.WriteAsync(result);
+    }
+});
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
 app.Run();
