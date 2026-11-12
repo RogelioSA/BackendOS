@@ -25,6 +25,7 @@ namespace nest.core.infraestructura.db.General
                 new AdjuntoTipo { Id = AdjuntoTipoEnum.Cv, Nombre = "Hoja de vida", NombreCorto = "CV", Activo = true },
                 new AdjuntoTipo { Id = AdjuntoTipoEnum.Contrato, Nombre = "Contrato", NombreCorto = "Contrato", Activo = true },
                 new AdjuntoTipo { Id = AdjuntoTipoEnum.Habilitacion, Nombre = "Habilitación", NombreCorto = "HAB", Activo = true },
+                new AdjuntoTipo { Id = AdjuntoTipoEnum.FirmaDigital, Nombre = "Firma digital", NombreCorto = "FIR", Activo = true },
                 new AdjuntoTipo { Id = AdjuntoTipoEnum.Otro, Nombre = "Otros", NombreCorto = "Otros", Activo = true }
             };
         }
