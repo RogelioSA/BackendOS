@@ -148,7 +148,7 @@ builder.Services
                .Select().Filter().OrderBy().Expand().Count().SetMaxTop(null));
 
 var app = builder.Build();
-await MigrationResolver.ExecuteMigration(app);
+//await MigrationResolver.ExecuteMigration(app);
 if(hasBaseUrl) app.UsePathBase(Environment.GetEnvironmentVariable("BASE_URL"));
 app.UseSwagger();
 app.UseSwaggerUI(c =>
