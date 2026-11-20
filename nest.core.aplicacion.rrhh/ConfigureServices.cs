@@ -16,6 +16,7 @@ using nest.core.dominio.RRHH.PersonalCargoExternoEntities;
 using nest.core.dominio.RRHH.PersonalEntities;
 using nest.core.dominio.RRHH.PersonalEstadoEntities;
 using nest.core.dominio.RRHH.RegistroAsistenciaAdjuntoEntities;
+using nest.core.dominio.RRHH.RegistroAsistenciaAdjuntosEntities;
 using nest.core.dominio.RRHH.RegistroAsistenciaEntities;
 using nest.core.dominio.RRHH.RegistroAsistenciaOrdenTrabajoEntities;
 using nest.core.dominio.RRHH.RegistroAsistenciaPoliticaEntities;
@@ -46,6 +47,7 @@ namespace nest.core.aplicacion.rrhh
             services.AddTransient<IPersonalCargoExternoRepository, PersonalCargoExternoRepository>();
             services.AddTransient<IPersonalEstadoRepository, PersonalEstadoRepository>();
             services.AddTransient<IRegistroAsistenciaAdjuntoRepository, RegistroAsistenciaAdjuntoRepository>();
+            services.AddTransient<IRegistroAsistenciaAdjuntosRepository, RegistroAsistenciaAdjuntosRepository>();
             services.AddTransient<IRegistroAsistenciaRepository, RegistroAsistenciaRepository>();
             services.AddTransient<IRegistroAsistenciaOrdenTrabajoRepository, RegistroAsistenciaOrdenTrabajoRepository>();
             services.AddTransient<IRegistroAsistenciaPoliticaRepository, RegistroAsistenciaPoliticaRepository>();

@@ -1,5 +1,6 @@
 ﻿using nest.core.dominio.RRHH.HorarioDetalleEventoEntities;
 using nest.core.dominio.RRHH.PersonalCargoExternoEntities;
+using nest.core.dominio.RRHH.RegistroAsistenciaAdjuntosEntities;
 namespace nest.core.dominio.RRHH.RegistroAsistenciaEntities
 {
     public class RegistroAsistenciaQueryView
@@ -23,6 +24,7 @@ namespace nest.core.dominio.RRHH.RegistroAsistenciaEntities
         public OrdenTrabajoQueryView? OrdenTrabajo { get; set; }
         public OrdenServicioQueryView? OrdenServicio { get; set; }
         public PersonalCargoExterno PersonalCargoExterno { get; set; }
+        public List<AdjuntosQueryView> Adjuntos { get; set; }
 
     }
 
@@ -70,6 +72,15 @@ namespace nest.core.dominio.RRHH.RegistroAsistenciaEntities
         public string Descripcion { get; set; }
         //public DateTime? FechaInicial { get; set; }
         //public DateTime? FechaFinal { get; set; }
+
+    }
+
+    public class AdjuntosQueryView
+    {
+        public long? Id { get; set; }
+        public long? AdjuntoId { get; set; }
+        public RegistroAsistenciaAdjuntoTipoEnum? Tipo { get; set; }
+        public string? AdjuntoUrl { get; set; }
 
     }
 }

@@ -36,6 +36,7 @@ namespace nest.core.infraestructura.rrhh
             var resultado = base.Query()
                 .Include(x => x.Personal).ThenInclude(x => x.Persona)
                 .Include(x => x.RegistroAsistenciaAdjunto)
+                .Include(x => x.RegistroAsistenciaAdjuntos)
                 .Include(x => x.RegistroAsistenciaOrdenTrabajo).ThenInclude(x => x.OrdenTrabajoCabecera).ThenInclude(x => x.OrdenServicioCabecera)
                 .Include(x => x.Personal).ThenInclude(x => x.PersonalCargoExterno)
                 .AsNoTracking()
@@ -92,7 +93,14 @@ namespace nest.core.infraestructura.rrhh
                         Descripcion = x.RegistroAsistenciaOrdenTrabajo.OrdenTrabajoCabecera.OrdenServicioCabecera.Descripcion,
                         //FechaInicial = x.RegistroAsistenciaOrdenTrabajo.OrdenTrabajoCabecera.OrdenServicioCabecera.FechaInicial,
                         //FechaFinal = x.RegistroAsistenciaOrdenTrabajo.OrdenTrabajoCabecera.OrdenServicioCabecera.FechaFinal
-                    }
+                    },
+                    Adjuntos = x.RegistroAsistenciaAdjuntos.Select(a => new AdjuntosQueryView
+                    {
+                        Id = a.Id,
+                        AdjuntoId = a.AdjuntoId,
+                        Tipo = a.Tipo,
+                        AdjuntoUrl = $"{ConfigVariables.GeneralService}/Adjunto/download/{a.AdjuntoId}"
+                    }).ToList()
                 });
             return resultado;
         }

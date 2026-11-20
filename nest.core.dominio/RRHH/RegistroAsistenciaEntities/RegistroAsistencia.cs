@@ -1,6 +1,7 @@
 ﻿using nest.core.dominio.RRHH.HorarioDetalleEventoEntities;
 using nest.core.dominio.RRHH.PersonalEntities;
 using nest.core.dominio.RRHH.RegistroAsistenciaAdjuntoEntities;
+using nest.core.dominio.RRHH.RegistroAsistenciaAdjuntosEntities;
 using nest.core.dominio.RRHH.RegistroAsistenciaOrdenTrabajoEntities;
 using nest.core.dominio.RRHH.RegistroAsistenciaPoliticaEntities;
 using nest.core.dominio.RRHH.TerminalBiometricoEntities;
@@ -35,5 +36,6 @@ namespace nest.core.dominio.RRHH.RegistroAsistenciaEntities
         public HorarioDetalleEvento HorarioDetalleEvento { get; set; }
         public RegistroAsistenciaOrdenTrabajo RegistroAsistenciaOrdenTrabajo { get; set; }
         public RegistroAsistenciaAdjunto RegistroAsistenciaAdjunto { get; set; }
+        public List<RegistroAsistenciaAdjuntos> RegistroAsistenciaAdjuntos { get; set; }
     }
 }
