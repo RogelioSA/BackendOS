@@ -8,6 +8,7 @@ using nest.core.security.Extensions;
 namespace nest.core.security.Controllers.Datasource
 {
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.DATASOURCE)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.DATASOURCE}/[controller]")]
     public class CuentaContableController : ODataController
     {

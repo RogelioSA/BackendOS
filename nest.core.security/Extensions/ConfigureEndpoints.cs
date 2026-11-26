@@ -34,7 +34,7 @@ namespace nest.core.security.Extensions
             { EndpointsEnum.CONTABILIDAD, new SwaggerModelEndpoint { Title = "Contabilidad API", Version = "v1", MainPath = "contabilidad" } },
             { EndpointsEnum.MANTTO, new SwaggerModelEndpoint { Title = "Mantenimiento API", Version = "v1", MainPath = "mantto" } },
             { EndpointsEnum.PATRIMONIAL, new SwaggerModelEndpoint { Title = "Patrimonial API", Version = "v1", MainPath = "patrimonial" } },
-            { EndpointsEnum.DATASOURCE, new SwaggerModelEndpoint { Title = "Datasource API", Version = "v1", MainPath = "datasource" } },
+            //{ EndpointsEnum.DATASOURCE, new SwaggerModelEndpoint { Title = "Datasource API", Version = "v1", MainPath = "datasource" } },
             { EndpointsEnum.ICLOCK, new SwaggerModelEndpoint { Title = "iClock API", Version = "v1", MainPath = "iclock" } }
 
         };

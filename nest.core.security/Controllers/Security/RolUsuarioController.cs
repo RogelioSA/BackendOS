@@ -10,6 +10,7 @@ namespace nest.core.security.Controllers.Security;
 
 [Authorize]
 [ApiController]
+[ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.SECURITY)]
 [Route($"{ConfigureEndpoints.EndpointsEnum.SECURITY}/[controller]")]
 public class RolUsuarioController : Controller
 {

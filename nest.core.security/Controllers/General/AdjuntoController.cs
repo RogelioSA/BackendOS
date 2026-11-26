@@ -16,6 +16,7 @@ namespace nest.core.security.Controllers.General
     /// </summary>
     [Authorize]
     [ApiController]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.GENERAL)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.GENERAL}/[controller]")]
     public class AdjuntoController : ControllerBase
     {

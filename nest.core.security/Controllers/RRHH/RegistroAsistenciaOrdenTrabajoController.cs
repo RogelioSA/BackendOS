@@ -15,6 +15,7 @@ using nest.core.security.Extensions;
 namespace nest.core.security.Controllers.RRHH
 {
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.RRHH)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.RRHH}/[controller]")]
     [ApiController]
     public class RegistroAsistenciaOrdenTrabajoController : ControllerBase

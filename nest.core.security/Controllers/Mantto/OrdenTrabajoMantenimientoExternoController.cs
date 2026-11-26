@@ -17,6 +17,7 @@ namespace nest.core.security.Controllers.Mantto
     /// junto con sus detalles y activos asociados.
     /// </summary>
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.MANTTO)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.MANTTO}/OrdenTrabajo/MantenimientoExterno")]
     [ApiController]
     public class OrdenTrabajoMantenimientoExternoController : ControllerBase

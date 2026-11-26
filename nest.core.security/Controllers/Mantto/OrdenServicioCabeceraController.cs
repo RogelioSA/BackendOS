@@ -16,6 +16,7 @@ namespace nest.core.security.Controllers.Mantto
     /// Proporciona operaciones CRUD básicas para gestionar la información principal de las órdenes de servicio.
     /// </summary>
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.MANTTO)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.MANTTO}/[controller]")]
     [ApiController]
     public class OrdenServicioCabeceraController : ControllerBase

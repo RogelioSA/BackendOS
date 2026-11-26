@@ -11,6 +11,7 @@ namespace nest.core.security.Controllers.Legal
     /// Controlador para la gestión de contratos personales.
     /// </summary>
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.LEGAL)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.LEGAL}/[controller]")]
     [ApiController]
     public class ContratoPersonalController : ControllerBase

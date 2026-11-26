@@ -13,6 +13,7 @@ using nest.core.security.Extensions;
 namespace nest.core.security.Controllers.RRHH
 {
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.RRHH)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.RRHH}/[controller]")]
     [ApiController]
     public class RegistroAsistenciaController : ControllerBase
@@ -160,6 +161,16 @@ namespace nest.core.security.Controllers.RRHH
         {
             var data = await sender.Send(command, ct);
             return Ok(data);
+        }
+
+        /// <summary>Asocia la firma adjunta a todas las asistencias del usuario para cada fecha jornal indicada.</summary>
+        [HttpPost("firmas")]
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(typeof(ErrorMessage), 400)]
+        public async Task<ActionResult<int>> AdjuntarFirmas([FromBody] List<AdjuntarFirmaPorFechaItem> items, CancellationToken ct)
+        {
+            var cantidad = await sender.Send(new AdjuntarFirmaPorFechaCommand(items), ct);
+            return Ok(cantidad);
         }
 
         /// <summary>

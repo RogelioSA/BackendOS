@@ -14,6 +14,7 @@ namespace nest.core.security.Controllers.Mantto
     /// Permite CRUD y consultas por cabecera.
     /// </summary>
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.MANTTO)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.MANTTO}/[controller]")]
     [ApiController]
     public class OrdenTrabajoDetalleController : ControllerBase

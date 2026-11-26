@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
@@ -61,17 +62,20 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     string product = assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product;
-    c.SwaggerDoc("/", new OpenApiInfo
+    c.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
+    c.OperationFilter<CleanODataContentTypesFilter>();
+
+    c.SwaggerDoc("all", new OpenApiInfo
     {
-        Title = $"{product} - Principal",
+        Title = $"{product} - Todas las APIs",
         Version = assembly.GetName().Version?.ToString(),
+        Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description,
         Contact = new OpenApiContact
         {
             Name = "Gabriel Rodriguez Riveros",
             Email = "gabogth@gmail.com",
             Url = new Uri("https://www.linkedin.com/in/gabogth")
         },
-        Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description
     });
     foreach (var endpoint in ConfigureEndpoints.Endpoints)
     {
@@ -90,7 +94,9 @@ builder.Services.AddSwaggerGen(c =>
     }
     c.DocInclusionPredicate((docName, apiDesc) =>
     {
-        if (docName == "main") return true;
+        if (apiDesc.GroupName == ConfigureEndpoints.EndpointsEnum.DATASOURCE) 
+            return false;
+        if (docName == "all") return true;
         var relativePath = apiDesc.RelativePath;
         if (string.IsNullOrEmpty(relativePath)) return false;
         return relativePath.StartsWith(docName, StringComparison.OrdinalIgnoreCase);
@@ -153,6 +159,7 @@ if(hasBaseUrl) app.UsePathBase(Environment.GetEnvironmentVariable("BASE_URL"));
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
+    c.SwaggerEndpoint("./all/swagger.json", "Todas las APIs");
     foreach (var endpoint in ConfigureEndpoints.Endpoints)
         c.SwaggerEndpoint($"./{endpoint.Key}/swagger.json", endpoint.Value.Title);
 });

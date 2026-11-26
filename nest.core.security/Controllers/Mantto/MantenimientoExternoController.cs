@@ -14,6 +14,7 @@ namespace nest.core.security.Controllers.Mantto
     /// Permite gestionar la cabecera de la orden junto a la información específica del mantenimiento externo.
     /// </summary>
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.MANTTO)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.MANTTO}/[controller]")]
     [ApiController]
     public class MantenimientoExternoController : ControllerBase

@@ -14,6 +14,7 @@ namespace nest.core.security.Controllers.Contabilidad
     /// </summary>
     [Authorize]
     [ApiController]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.CONTABILIDAD)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.CONTABILIDAD}/[controller]")]
     public class CuentaContableTipoController : ControllerBase
     {

@@ -11,6 +11,7 @@ namespace nest.core.security.Controllers.Finanzas
 {
     [Authorize]
     [ApiController]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.FINANZAS)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.FINANZAS}/[controller]")]
     public class EntidadFinancieraController : ControllerBase
     {

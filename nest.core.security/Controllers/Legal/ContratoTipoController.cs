@@ -13,6 +13,7 @@ namespace nest.core.security.Controllers.Legal
     /// Controlador para la gestión de tipos de contrato.
     /// </summary>
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.LEGAL)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.LEGAL}/[controller]")]
     [ApiController]
     public class ContratoTipoController : ControllerBase

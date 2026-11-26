@@ -138,7 +138,7 @@ namespace nest.core.aplicacion.rrhh.RegistroAsistenciaOrdenTrabajos.Handlers
                     var adjunto = new dominio.RRHH.RegistroAsistenciaAdjuntosEntities.RegistroAsistenciaAdjuntos
                     {
                         EmpresaId = registro.EmpresaId,
-                        Id = registro.Id,
+                        RegistroAsistenciaId = registro.Id,
                         AdjuntoId = request.AdjuntoId
                     };
                     await registroAsistenciaAdjuntosRepository.Agregar(adjunto);

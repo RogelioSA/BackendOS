@@ -11,6 +11,7 @@ namespace nest.core.security.Controllers.General
 {
     [Authorize]
     [ApiController]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.GENERAL)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.GENERAL}/[controller]")]
     public class DepartamentoController : ControllerBase
     {

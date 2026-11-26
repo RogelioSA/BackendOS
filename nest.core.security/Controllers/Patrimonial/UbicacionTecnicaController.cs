@@ -16,6 +16,7 @@ namespace nest.core.security.Controllers.Patrimonial
     /// </summary>
     [Authorize]
     [ApiController]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.PATRIMONIAL)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.PATRIMONIAL}/[controller]")]
     public class UbicacionTecnicaController : ControllerBase
     {

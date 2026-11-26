@@ -16,6 +16,7 @@ namespace nest.core.security.Controllers.Mantto
     /// Permite realizar operaciones CRUD básicas sobre las órdenes externas asociadas.
     /// </summary>
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.MANTTO)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.MANTTO}/[controller]")]
     [ApiController]
     public class OrdenServicioMantenimientoExternoController : ControllerBase

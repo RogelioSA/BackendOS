@@ -14,6 +14,7 @@ namespace nest.core.security.Controllers.Corporativo
     /// </summary>
     [Authorize]
     [ApiController]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.CORPORATIVO)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.CORPORATIVO}/[controller]")]
     public class EstructuraOrganizacionalController : ControllerBase
     {

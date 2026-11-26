@@ -11,6 +11,7 @@ namespace nest.core.security.Controllers.Costos
 {
     [Authorize]
     [ApiController]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.COSTOS)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.COSTOS}/[controller]")]
     public class CentroDeCostosController : ControllerBase
     {

@@ -13,6 +13,7 @@ namespace nest.core.security.Controllers.Mantto
     /// Controlador para gestionar el personal asociado a las órdenes de trabajo.
     /// </summary>
     [Authorize]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.MANTTO)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.MANTTO}/[controller]")]
     [ApiController]
     public class OrdenTrabajoPersonalController : ControllerBase

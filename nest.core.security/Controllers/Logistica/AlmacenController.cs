@@ -12,6 +12,7 @@ using nest.core.security.Extensions;
 namespace nest.core.security.Controllers.Logistica;
 
 [Authorize]
+[ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.LOGISTICA)]
 [Route($"{ConfigureEndpoints.EndpointsEnum.LOGISTICA}/[controller]")]
 [ApiController]
 public class AlmacenController : ControllerBase

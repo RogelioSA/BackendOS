@@ -14,6 +14,7 @@ namespace nest.core.security.Controllers.IClock
     /// </summary>
     [AllowAnonymous]
     [ApiController]
+    [ApiExplorerSettings(GroupName = ConfigureEndpoints.EndpointsEnum.ICLOCK)]
     [Route($"{ConfigureEndpoints.EndpointsEnum.ICLOCK}")]
     public class IclockController : ControllerBase
     {

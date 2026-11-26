@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using nest.core.dominio;
 using nest.core.dominio.RRHH.HorarioDetalleEventoEntities;
 using nest.core.dominio.RRHH.PersonalEntities;
+using nest.core.dominio.RRHH.RegistroAsistenciaAdjuntosEntities;
 using nest.core.dominio.RRHH.RegistroAsistenciaEntities;
 using nest.core.infraestructura.db.DbContext;
 using nest.core.infraestructura.db.Utils;
@@ -26,6 +27,7 @@ namespace nest.core.infraestructura.rrhh
                 .Include(x => x.Personal).ThenInclude(x => x.Persona).ThenInclude(x => x.LicenciaConducir)
                 .Include(x => x.Personal).ThenInclude(x => x.Persona).ThenInclude(x => x.Sexo)
                 .Include(x => x.RegistroAsistenciaPolitica)
+                .Include(x => x.RegistroAsistenciaAdjuntos.Where(r => r.Tipo == RegistroAsistenciaAdjuntoTipoEnum.FirmaDigital))
                 .Include(x => x.HorarioDetalleEvento).ThenInclude(x => x.HorarioDetalle).ThenInclude(x => x.HorarioCabecera)
                 .AsNoTracking()
                 .AsSplitQuery();
@@ -121,6 +123,10 @@ namespace nest.core.infraestructura.rrhh
                 .OrderBy(x => x.Fecha)
                 .ToListAsync();
         }
+        public Task<List<RegistroAsistencia>> BuscarPorPersonalYFechaJornal(int personalId, DateOnly fechaJornal) =>
+            context.Set<RegistroAsistencia>()
+                .Where(x => x.PersonalId == personalId && x.FechaJornal == fechaJornal)
+                .ToListAsync();
         public Task<RegistroAsistencia> BuscarPorRangoFecha(int personalId, DateTime fechaInicio, DateTime fechaFin, HorarioDetalleEventoTipoEnum tipoMarca)
         {
             if (fechaFin < fechaInicio)
